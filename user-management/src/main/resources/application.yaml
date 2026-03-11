@@ -30,8 +30,7 @@ logging:
     root: INFO
     io.dream.chatam: DEBUG
 
-# custom envs
-create-user:
+rabbitmq:
   queue:
     name: user_created_queue
   exchange:
