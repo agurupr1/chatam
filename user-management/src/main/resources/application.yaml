@@ -14,14 +14,27 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 springdoc:
   swagger-ui:
     path: /api-docs-ui.html
     operations-sorter: alpha
   api-docs:
     path: /v3/api-docs
-
 logging:
   level:
     root: INFO
     io.dream.chatam: DEBUG
+
+# custom envs
+create-user:
+  queue:
+    name: user_created_queue
+  exchange:
+    name: user_exchange
+  routing:
+    key: user_routing_key

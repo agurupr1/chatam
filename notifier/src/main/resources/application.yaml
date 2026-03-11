@@ -12,7 +12,17 @@ spring:
           auth: true
           starttls:
             enable: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
 logging:
   level:
     root: INFO
     io.dream.chatam: DEBUG
+
+rabbitmq:
+  queue:
+    name: user_created_queue

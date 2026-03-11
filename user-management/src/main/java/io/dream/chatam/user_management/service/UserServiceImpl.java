@@ -6,7 +6,9 @@ import io.dream.chatam.user_management.model.UserMessage;
 import io.dream.chatam.user_management.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    @Value("${create-user.exchange.name}")
+    private String exchange;
+
+    @Value("${create-user.routing.key}")
+    private String routingKey;
+
     @Override
     public UserMessage createUser(CreateUserRequest createUserRequest) {
         LOGGER.info("Attempting to create user with email: {}", createUserRequest.getEmail());
@@ -42,6 +53,10 @@ public class UserServiceImpl implements UserService {
         Map<String, String> userDetails = new HashMap<>();
         userDetails.put("userId", createdUser.getUserId());
         userDetails.put("userEmailId", createdUser.getEmailId());
+
+        LOGGER.info("Sending message to RabbitMQ");
+        rabbitTemplate.convertAndSend(exchange, routingKey, userDetails);
+
         return new UserMessage("201", "User Created", userDetails);
     }
 
