@@ -14,6 +14,18 @@ public class UserMessage {
         this.userDetails.putAll(userDetails);
     }
 
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public String getUserMessage() {
+        return userMessage;
+    }
+
+    public Map<String, String> getUserDetails() {
+        return userDetails;
+    }
+
     @Override
     public String toString() {
         return "UserMessage{" +

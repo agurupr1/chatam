@@ -30,10 +30,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @Value("${create-user.exchange.name}")
+    @Value("${rabbitmq.exchange.name}")
     private String exchange;
 
-    @Value("${create-user.routing.key}")
+    @Value("${rabbitmq.routing.key}")
     private String routingKey;
 
     @Override
