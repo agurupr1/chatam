@@ -32,19 +32,19 @@ public class UserRestController {
     }
 
     @Operation(summary = "Delete user by id", description = "Delete user by id")
-    @PostMapping("/")
+    @DeleteMapping("/{id}")
     public UserMessage deleteUser(@PathVariable UUID id) {
         return userService.deleteUser(id);
     }
 
     @Operation(summary = "Deactivate user by id", description = "Deactivate user by id")
-    @PostMapping("/")
+    @PostMapping("/deactivate/{id}")
     public UserMessage deactivateUser(@PathVariable UUID id) {
         return userService.deactivateUser(id);
     }
 
     @Operation(summary = "Activate user by id", description = "Activate user by id")
-    @PostMapping("/")
+    @PostMapping("/activate/{id}")
     public UserMessage activateUser(@PathVariable UUID id) {
         return userService.activateUser(id);
     }

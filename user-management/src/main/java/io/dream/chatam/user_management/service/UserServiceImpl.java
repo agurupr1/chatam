@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
         User newUser = new User(createUserRequest.getEmail(), encodedPassword);
         User createdUser = userRepository.save(newUser);
         LOGGER.info("User created successfully with userId: {}", createdUser.getUserId());
+
         Map<String, String> userDetails = new HashMap<>();
         userDetails.put("userId", createdUser.getUserId());
         userDetails.put("userEmailId", createdUser.getEmailId());

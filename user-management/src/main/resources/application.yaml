@@ -16,12 +16,9 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 springdoc:
   swagger-ui:
-    # Change the default path from /swagger-ui.html
     path: /api-docs-ui.html
-    # Sort endpoints alphabetically
     operations-sorter: alpha
   api-docs:
-    # Change the path for the raw JSON spec
     path: /v3/api-docs
 
 logging:
