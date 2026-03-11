@@ -5,6 +5,7 @@ import io.dream.chatam.user_management.model.UserMessage;
 import io.dream.chatam.user_management.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class UserRestController {
 
     @Operation(summary = "Create new user", description = "Create new user")
     @PostMapping("/")
-    public UserMessage createUser(@RequestBody CreateUserRequest createUserRequest) {
+    public UserMessage createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
         return userService.createUser(createUserRequest);
     }
 
