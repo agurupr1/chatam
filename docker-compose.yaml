@@ -11,9 +11,25 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/user_management_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_RABBITMQ_HOST=rabbitmq
     depends_on:
       mysql-db:
         condition: service_healthy
+      rabbitmq:
+        condition: service_started
+    networks:
+      - chatam-network
+
+  notifier-app:
+    build:
+      context: notifier
+      dockerfile: notifier.Dockerfile
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=guest
+      - SPRING_RABBITMQ_PASSWORD=guest
+    depends_on:
       rabbitmq:
         condition: service_started
     networks:
