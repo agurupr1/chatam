@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: user-management
+  datasource:
+    url: jdbc:mysql://localhost:3306/user_management_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+springdoc:
+  swagger-ui:
+    path: /api-docs-ui.html
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+logging:
+  level:
+    root: INFO
+    io.dream.chatam: DEBUG
+
+rabbitmq:
+  queue:
+    name: user_created_queue
+  exchange:
+    name: user_exchange
+  routing:
+    key: user_routing_key
